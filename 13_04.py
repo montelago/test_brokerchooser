@@ -53,12 +53,34 @@ print(merge)
 print(list(merge))
 print(merge.shape[0]) # 3.447 con inner solo esas
 
-print(fuzzy_country_matching(df_brokerchooser, df_broker_data))
+fuzzy_matching = fuzzy_country_matching(df_brokerchooser, df_broker_data)
+print(fuzzy_matching)
 
-
+apply_fuzzy = apply_fuzzy_matching(df_brokerchooser, df_broker_data)
+print(apply_fuzzy)
+print(apply_fuzzy.shape[0])
 
 
 """
+# Define a function for fuzzy matching
+def fuzzy_match(row, broker_df, column):
+    match = process.extractOne(row[column], broker_df[column], scorer=fuzz.token_sort_ratio)
+    return match[0], match[1]  # returns the best match and the score
+
+# Apply fuzzy matching to merge data
+conversions['broker_country_name'], conversions['match_score'] = zip(*conversions.apply(fuzzy_match, broker_df=broker_data, column='country_name', axis=1))
+
+
+# Filter matches with a reasonable threshold
+conversions = conversions[conversions['match_score'] >= 80]
+
+# Merge datasets on country_name
+merged_data = pd.merge(conversions, broker_data, left_on='broker_country_name', right_on='country_name', how='left')
+
+
+
+
+
 df_broker_data['timestamp'] = df_broker_data['timestamp'].apply(lambda x: difflib.get_close_matches(x, df_brokerchooser['created_at'])[0])
 df_brokerchooser.merge(df_broker_data)
 
