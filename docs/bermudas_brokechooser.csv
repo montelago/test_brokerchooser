@@ -1,0 +1,39 @@
+id,session_id,country_name,is_mobile,ui_element,created_at,measurement_category
+5200843,71100595,Bermuda,0,dynamic score top broker list row,2024-04-01 00:02:50,01bestca/02notrel/03notrel
+5215872,70285892,Bermuda,1,fmb broker list item link,2024-04-02 13:38:21,01fmybro/02notrel/03notrel
+5215912,70285892,Bermuda,1,fmb broker list item link,2024-04-02 13:42:31,01fmybro/02notrel/03notrel
+5216822,71304884,Bermuda,0,dynamic score top broker list row,2024-04-02 15:44:44,01counpg/02notrel/03notrel
+5276377,72227930,Bermuda,1,dynamic score top broker list row,2024-04-09 14:16:14,01bestca/02notrel/03online
+5297400,72519420,Bermuda,1,dynamic score top broker list row,2024-04-12 05:19:02,01counpg/02notrel/03notrel
+5300071,72578187,Bermuda,0,dynamic score top broker list row,2024-04-12 13:40:45,01bestca/02notrel/03online
+5310646,72812233,Bermuda,0,dynamic score top broker list row,2024-04-13 23:32:43,01counpg/02notrel/03notrel
+5310665,72812233,Bermuda,0,popularity-box-whole-row-link,2024-04-13 23:37:30,01counpg/02notrel/03notrel
+5319214,72977159,Bermuda,1,dynamic score top broker list row,2024-04-15 07:14:27,01counpg/02notrel/03notrel
+5325149,73057067,Bermuda,1,chapter-ao-button/first-chapter,2024-04-16 00:18:27,01educat/02notrel/03notrel
+5381117,73851101,Bermuda,1,dynamic score top broker list row,2024-04-22 17:23:37,01counpg/02notrel/03notrel
+5395204,74073274,Bermuda,0,broker-chapter-2/summary,2024-04-24 10:20:18,01review/02notrel/03altbro
+5396532,73851101,Bermuda,1,dynamic score top broker list row,2024-04-24 13:32:25,01counpg/02notrel/03notrel
+5402496,74146493,Bermuda,0,popularity-box-whole-row-link,2024-04-24 23:16:04,01counpg/02notrel/03notrel
+5409035,74224346,Bermuda,0,broker-name-link,2024-04-25 15:41:26,01bestca/02notrel/03online
+5418272,74456629,Bermuda,0,broker-name-link,2024-04-26 19:21:17,01counpg/02notrel/03notrel
+5419217,74456629,Bermuda,0,dynamic score top broker list row,2024-04-26 22:08:57,01counpg/02notrel/03notrel
+5433234,74737087,Bermuda,1,dynamic score top broker list row,2024-04-28 15:33:28,01counpg/02notrel/03notrel
+5433661,74743329,Bermuda,0,dynamic score top broker list row,2024-04-28 16:44:46,01bestca/02notrel/03online
+5433743,74743329,Bermuda,0,dynamic score top broker list row,2024-04-28 16:56:49,01bestca/02notrel/03online
+5450457,75096289,Bermuda,1,mobile-chapter-2-top5-box,2024-04-30 17:51:05,01counpg/02notrel/03notrel
+5452944,75147058,Bermuda,1,broker-name-link,2024-05-01 00:25:04,01bestca/02notrel/03notrel
+5452964,75147058,Bermuda,1,broker-name-link,2024-05-01 00:27:49,01bestca/02notrel/03notrel
+5502161,75760111,Bermuda,1,dynamic score top broker list row,2024-05-05 04:37:24,01counpg/02notrel/03notrel
+5507831,75871383,Bermuda,1,dynamic score top broker list row,2024-05-05 21:45:56,01counpg/02notrel/03notrel
+5507833,75871383,Bermuda,1,dynamic score top broker list row,2024-05-05 21:46:23,01counpg/02notrel/03notrel
+5524940,76126327,Bermuda,0,dynamic score top broker list row,2024-05-07 16:10:40,01counpg/02notrel/03notrel
+5528795,76195564,Bermuda,1,broker-name-link,2024-05-08 02:15:29,01bestca/02notrel/03notrel
+5538261,76307937,Bermuda,1,dynamic score top broker list row,2024-05-08 23:53:45,01bestca/02notrel/03notrel
+5597034,77007480,Bermuda,1,dynamic score top broker list row,2024-05-15 02:07:55,01counpg/02notrel/03notrel
+5603147,77076881,Bermuda,0,broker-name-link,2024-05-15 16:13:08,01counpg/02notrel/03notrel
+5605485,77098192,Bermuda,0,interactive-param-table-name-link,2024-05-15 20:40:00,01review/02notrel/03altbro
+5639219,77604255,Bermuda,1,mobile-chapter-2-top5-box,2024-05-19 11:39:56,01review/02notrel/03notrel
+5650701,77098192,Bermuda,0,desktop-top5-box,2024-05-20 19:04:51,01review/02notrel/03review
+5687750,78493221,Bermuda,0,broker-name-link,2024-05-24 22:50:24,01cateme/02notrel/03notrel
+5709775,79167604,Bermuda,1,dynamic score top broker list row,2024-05-27 23:12:10,01counpg/02notrel/03notrel
+5730116,79912655,Bermuda,1,dynamic score top broker list row,2024-05-30 11:41:36,01counpg/02notrel/03notrel

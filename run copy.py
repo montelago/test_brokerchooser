@@ -19,7 +19,10 @@ print(df_brokerchooser.sort_values(['created_at']))
 # Normalize data types
 print(df_broker_data.info())
 # 1. Data types
+
 df_broker_data['important_score'] = df_broker_data['important_score'].replace("#REF!", int(0))
+#df_broker_data['timestamp'] = df_broker_data['timestamp'].apply(datetime)
+#df_broker_data['timestamp'] = pd.to_datetime(df_broker_data['timestamp'], unit='s')
 df_broker_data = df_broker_data.astype({'important_score': 'int', 'timestamp': 'datetime64[ns]'})
 df_broker_data = df_broker_data.convert_dtypes()
 
@@ -41,18 +44,22 @@ print(df_page_category)
 # 2. Standardize formats -> there are no numeric types (amounts, measures, anything), easier
 
 #  3. Handling missing values -> método para sacar qué columnas tienen valores nulos
-df_broker_data = missing_values(df_broker_data)
-"""
+print(df_broker_data.isnull().any())
+df_broker_data = df_broker_data.fillna('NULL')
 print(df_broker_data)
 print(df_broker_data.isnull().any())
-df_brokerchooser = missing_values(df_brokerchooser)
+
+print(df_brokerchooser.info())
+print(df_brokerchooser.isnull().any())
+df_brokerchooser = df_brokerchooser.fillna('NULL')
 print(df_brokerchooser)
 print(df_brokerchooser.isnull().any())
-df_page_category = missing_values(df_page_category)
-print(df_page_category)
+print(df_brokerchooser.info())
+
+print(df_page_category.info()) # we could see there is no null value in any field
 print(df_page_category.isnull().any())
-"""
-"""
+
+
 
 # 4. Possible matches fields in any df
 country_residency = df_broker_data['country_residency'].unique()
@@ -67,7 +74,7 @@ print(set(ip_country)-set(country_residency))
 
 
 
-
+"""
 
 
 

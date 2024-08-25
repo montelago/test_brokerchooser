@@ -1,0 +1,44 @@
+import pandas as pd
+
+def load_datasets():
+    conversions = pd.read_csv('brokerchooser_conversions.csv')
+    broker_data = pd.read_csv('broker_data.csv')
+    page_category_mapping = pd.read_csv('page_category_mapping.csv')
+    return conversions, broker_data, page_category_mapping
+
+def normalize_conversions(conversions, page_category_mapping):
+    conversions['created_at'] = pd.to_datetime(conversions['created_at'], errors='coerce')
+    conversions = conversions.merge(page_category_mapping, on='measurement_category', how='left')
+    conversions.rename(columns={'category_name': 'full_page_category'}, inplace=True)
+    return conversions
+
+def normalize_broker_data(broker_data):
+    broker_data['timestamp'] = pd.to_datetime(broker_data['timestamp'], errors='coerce')
+    broker_data['country_residency'] = broker_data['country_residency'].str.lower()
+    broker_data['ip_country'] = broker_data['ip_country'].str.lower()
+    return broker_data
+
+def match_and_merge_datasets(conversions, broker_data):
+    conversions['session_id'] = conversions['session_id'].astype(str)
+    broker_data['session_id'] = broker_data['session_id'].astype(str)
+    merged_data = pd.merge(conversions, broker_data, left_on='session_id', right_on='session_id', how='inner')
+    return merged_data
+
+def handle_missing_values(df):
+    df.fillna({'important_score': df['important_score'].median()}, inplace=True)
+    df.dropna(subset=['full_page_category', 'country_residency'], inplace=True)
+    return df
+
+def save_cleaned_data(df, output_path):
+    df.to_csv(output_path, index=False)
+
+def data_processing_pipeline():
+    conversions, broker_data, page_category_mapping = load_datasets()
+    conversions_normalized = normalize_conversions(conversions, page_category_mapping)
+    broker_data_normalized = normalize_broker_data(broker_data)
+    unified_data = match_and_merge_datasets(conversions_normalized, broker_data_normalized)
+    cleaned_data = handle_missing_values(unified_data)
+    save_cleaned_data(cleaned_data, 'cleaned_data/unified_data.csv')
+
+# Run the pipeline
+data_processing_pipeline()

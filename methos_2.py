@@ -5,8 +5,42 @@ import csv
 import logging
 import datetime
 import numpy as np
+from fuzzywuzzy import process, fuzz
 import sys
-from rapidfuzz import process, fuzz
+
+
+def exact_matching(conversions, broker_data):
+    merged_data = pd.merge(
+        conversions,
+        broker_data,
+        left_on=['created_at', 'country_name'],
+        right_on=['timestamp', 'country_residency'],
+        how='inner'
+    )
+    return merged_data
+
+def fuzzy_country_matching(row, broker_data):
+    """Fuzzy match the country_name from conversions with broker_data."""
+    country_name = row['country_name']
+    best_match = process.extractOne(country_name, broker_data['country_residency'], scorer=fuzz.token_sort_ratio)
+    
+    # If the best match is above a certain threshold, return the matched row
+    if best_match[1] >= 85:  # 85% match threshold
+        matched_row = broker_data.loc[broker_data['country_residency'] == best_match[0]]
+        return matched_row.iloc[0] if not matched_row.empty else None
+    return None
+
+def apply_fuzzy_matching(conversions, broker_data):
+    """Apply fuzzy matching for non-exact matches."""
+    fuzzy_matches = conversions.apply(fuzzy_country_matching, axis=1, broker_data=broker_data)
+    
+    # Drop rows that couldn't be matched
+    fuzzy_matches.dropna(inplace=True)
+    
+    # Join fuzzy matched data
+    fuzzy_matched_data = pd.merge(conversions, fuzzy_matches, left_index=True, right_index=True, how='inner')
+    return fuzzy_matched_data
+
 
 def get_delimiter(file_path: str) -> str:
     with open(file_path, 'r') as csvfile:
@@ -88,27 +122,3 @@ def fuzzy_merge(df_1, df_2, key1, key2, threshold=90, limit=2):
     df_1['matches'] = m2
     
     return df_1
-
-
-def exact_matching(conversions, broker_data):
-    merged_data = pd.merge(
-        conversions,
-        broker_data,
-        left_on=['created_at', 'country_name'],
-        right_on=['timestamp', 'country_residency'],
-        how='inner'
-    )
-    return merged_data
-
-
-def fuzzy_country_matching(brokechooser, broker_data):
-    """Fuzzy match the country_name from conversions with broker_data."""
-    country_name = brokechooser['country_name']
-    best_match = process.extractOne(country_name, broker_data['country_residency'], scorer=fuzz.token_sort_ratio)
-    
-    # If the best match is above a certain threshold, return the matched row
-    if best_match[1] >= 85:  # 85% match threshold
-        matched_row = broker_data.loc[broker_data['country_residency'] == best_match[0]]
-        return matched_row.iloc[0] if not matched_row.empty else None
-    return None
-
